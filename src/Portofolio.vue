@@ -88,6 +88,28 @@ defineProps<{
         </div>
       </section>
 
+      <!-- Data Cleaning Process -->
+      <section id="cleaning" class="max-w-6xl mx-auto px-6 py-16 border-t border-[#eae6de]">
+        <div class="bg-[#fdf9f3] border-l-4 border-[#d9822b] rounded-2xl p-8 shadow-sm">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="w-8 h-8 rounded-lg bg-white text-[#d9822b] flex items-center justify-center text-sm font-bold shadow-sm">🧹</span>
+            <h2 class="text-2xl sm:text-3xl font-medium text-[#111]">Data Cleaning Process</h2>
+          </div>
+          <p class="text-sm sm:text-base text-[#555] mb-6 leading-relaxed">
+            Before performing the analysis, we cleaned our data. Below are the steps we took:
+          </p>
+          <ul class="list-disc pl-6 space-y-3 text-sm sm:text-base text-[#555]">
+            <li>Removing duplicate data</li>
+            <li>Checking for missing values</li>
+            <li>Handling null BMI data</li>
+            <li>Standardizing categorical values</li>
+            <li>Converting incorrect data types</li>
+            <li>Creating age segmentation categories</li>
+            <li>Validating data consistency</li>
+          </ul>
+        </div>
+      </section>
+
       <!-- Data Processing Pipeline -->
       <section id="pipeline" class="max-w-6xl mx-auto px-6 py-16 border-t border-[#eae6de]">
         <div class="text-xs font-semibold tracking-widest text-[#d9822b] uppercase mb-3">DATA PIPELINE</div>
@@ -345,6 +367,28 @@ defineProps<{
               The primary goal is to develop a comprehensive, interactive dashboard that visualizes key stroke risk indicators. This tool will allow clinical staff and researchers to quickly identify patterns, demographic vulnerabilities, and comorbid conditions, facilitating data-driven decision-making and targeted preventative interventions.
             </p>
           </div>
+        </div>
+      </section>
+
+      <!-- Data Cleaning Process -->
+      <section id="cleaning" class="max-w-6xl mx-auto px-6 py-16 border-t border-[#eae6de]">
+        <div class="bg-[#fdf9f3] border-l-4 border-[#d9822b] rounded-2xl p-8 shadow-sm">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="w-8 h-8 rounded-lg bg-white text-[#d9822b] flex items-center justify-center text-sm font-bold shadow-sm">🧹</span>
+            <h2 class="text-2xl sm:text-3xl font-medium text-[#111]">Data Cleaning Process</h2>
+          </div>
+          <p class="text-sm sm:text-base text-[#555] mb-6 leading-relaxed">
+            Before performing the analysis, we cleaned our data. Below are the steps we took:
+          </p>
+          <ul class="list-disc pl-6 space-y-3 text-sm sm:text-base text-[#555]">
+            <li>Removing duplicate data</li>
+            <li>Checking for missing values</li>
+            <li>Handling null BMI data</li>
+            <li>Standardizing categorical values</li>
+            <li>Converting incorrect data types</li>
+            <li>Creating age segmentation categories</li>
+            <li>Validating data consistency</li>
+          </ul>
         </div>
       </section>
 
