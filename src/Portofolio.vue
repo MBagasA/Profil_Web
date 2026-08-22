@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import mbagasLogo from './assets/mbagas.svg'
+import Food from './food.vue'
 
 defineProps<{
   projectType?: string
@@ -8,7 +9,10 @@ defineProps<{
 </script>
 
 <template>
-  <div class="min-h-screen bg-[#fdfbf7] text-[#222222] font-sans antialiased selection:bg-[#d9822b] selection:text-white">
+  <template v-if="projectType === 'food'">
+    <Food :onBack="onBack" />
+  </template>
+  <div v-else class="min-h-screen bg-[#fdfbf7] text-[#222222] font-sans antialiased selection:bg-[#d9822b] selection:text-white">
     
     <!-- Header / Navbar -->
     <header class="max-w-6xl mx-auto px-6 py-6 flex items-center justify-between border-b border-[#eae6de]">
@@ -692,6 +696,10 @@ defineProps<{
     <!-- Footer / Get In Touch -->
     <footer id="contact" class="bg-[#fdfbf7] text-[#222] py-20 border-t border-[#eae6de]">
       <div class="max-w-4xl mx-auto px-6 text-center space-y-8">
+        <div class="space-y-3">
+          <h2 class="text-3xl sm:text-4xl font-normal text-[#111]">Get in Touch</h2>
+          <p class="text-xs font-semibold tracking-widest text-[#d9822b] uppercase">Let's Connect</p>
+        </div>
         <p class="text-base sm:text-lg text-[#555] max-w-2xl mx-auto leading-relaxed">
           Interested in collaborating on data projects, analytics, or research? I'd love to hear from you.
         </p>
@@ -704,9 +712,16 @@ defineProps<{
           </a>
 
           <!-- LinkedIn Button -->
-          <a href="https://linkedin.com" target="_blank" class="bg-white hover:bg-[#f5efe6] text-[#111] px-6 py-3.5 rounded-xl font-medium text-sm border border-[#eae6de] transition-colors flex items-center gap-2 shadow-sm">
+          <a href="https://www.linkedin.com/in/m-bagas-afrizal" target="_blank" class="bg-white hover:bg-[#f5efe6] text-[#111] px-6 py-3.5 rounded-xl font-medium text-sm border border-[#eae6de] transition-colors flex items-center gap-2 shadow-sm">
             <svg class="w-4 h-4 fill-current text-[#111]" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
             LinkedIn
+            <svg class="w-3.5 h-3.5 fill-none stroke-current text-[#555]" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+          </a>
+
+          <!-- GitHub Button -->
+          <a href="https://github.com/MBagasA" target="_blank" class="bg-white hover:bg-[#f5efe6] text-[#111] px-6 py-3.5 rounded-xl font-medium text-sm border border-[#eae6de] transition-colors flex items-center gap-2 shadow-sm">
+            <svg class="w-4 h-4 fill-current text-[#111]" viewBox="0 0 19 19"><path fill-rule="evenodd" d="M9.356 1.85C5.05 1.85 1.57 5.356 1.57 9.694a7.84 7.84 0 0 0 5.324 7.44c.387.079.528-.168.528-.376 0-.182-.013-.805-.013-1.454-2.165.467-2.616-.935-2.616-.935-.349-.91-.864-1.143-.864-1.143-.71-.48.051-.48.051-.48.787.051 1.2.805 1.2.805.695 1.194 1.817.857 2.268.649.064-.507.27-.857.49-1.052-1.728-.182-3.545-.857-3.545-3.87 0-.857.31-1.558.8-2.104-.078-.195-.349-1 .077-2.078 0 0 .657-.208 2.14.805a7.5 7.5 0 0 1 1.946-.26c.657 0 1.328.092 1.946.26 1.483-1.013 2.14-.805 2.14-.805.426 1.078.155 1.883.078 2.078.502.546.799 1.247.799 2.104 0 3.013-1.818 3.675-3.558 3.87.284.247.528.714.528 1.454 0 1.052-.012 1.896-.012 2.156 0 .208.142.455.528.377a7.84 7.84 0 0 0 5.324-7.441c.013-4.338-3.48-7.844-7.773-7.844" clip-rule="evenodd"/></svg>
+            GitHub
             <svg class="w-3.5 h-3.5 fill-none stroke-current text-[#555]" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
           </a>
         </div>

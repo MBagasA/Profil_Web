@@ -3,23 +3,23 @@ import { ref } from 'vue'
 import Portofolio from './Portofolio.vue'
 import mbagasLogo from './assets/mbagas.svg'
 
-const currentView = ref<'home' | 'stroke'>('home')
+const currentView = ref<'home' | 'stroke' | 'sneaker' | 'food'>('home')
 const mobileMenuOpen = ref(false)
 
 const projects = [
   {
-    category: 'PYTHON · MACHINE LEARNING',
+    category: 'SQL · POWER BI',
     title: 'Dataset of processed feed products and frozen food',
     description: 'Developed a predictive model identifying at-risk customers, reducing churn by 18% over two quarters.',
     chartType: 'line',
-    action: 'home'
+    action: 'food'
   },
   {
     category: 'SQL · OPERATIONS',
     title: 'Sneaker sales dataset & Logistics Analytics',
     description: 'Analyzed global logistics and retail sales data to optimize inventory routing, saving $1.2M in annual freight costs.',
     chartType: 'bars',
-    action: 'home'
+    action: 'sneaker'
   },
   {
     category: 'SQL · POWER BI',
@@ -65,8 +65,8 @@ const toolkit = [
 ]
 
 function openProject(action: string) {
-  if (action === 'stroke') {
-    currentView.value = 'stroke'
+  if (action !== 'home') {
+    currentView.value = action as 'stroke' | 'sneaker' | 'food'
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 }
@@ -78,7 +78,7 @@ function goHome() {
 </script>
 
 <template>
-  <Portofolio v-if="currentView === 'stroke'" projectType="stroke" :onBack="goHome" />
+  <Portofolio v-if="currentView !== 'home'" :projectType="currentView" :onBack="goHome" />
 
   <div v-else class="min-h-screen bg-[#fdfbf7] text-[#222222] font-sans antialiased selection:bg-[#d9822b] selection:text-white">
     
@@ -215,28 +215,32 @@ function goHome() {
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div v-for="(project, i) in projects" :key="i" class="group flex flex-col" :class="{ 'cursor-pointer': project.action === 'stroke' }" @click="openProject(project.action)">
+        <div v-for="(project, i) in projects" :key="i" class="group flex flex-col" :class="{ 'cursor-pointer': project.action !== 'home' }" @click="openProject(project.action)">
           <div class="bg-[#f4efe6] border border-[#eae6de] rounded-2xl h-56 mb-5 flex items-center justify-center relative overflow-hidden group-hover:border-[#d9822b] transition-colors">
-            <div v-if="project.chartType === 'line'" class="w-3/4 h-2/3 flex items-end">
-              <svg class="w-full h-full text-[#d9822b]" viewBox="0 0 200 120" fill="none">
+            <div v-if="project.chartType === 'line'" class="w-3/4 h-2/3 flex flex-col items-center justify-end">
+              <svg class="w-full h-1/2 text-[#d9822b] mb-4" viewBox="0 0 200 120" fill="none">
                 <path d="M10 100 Q 60 40, 110 70 T 190 20" stroke="#d9822b" stroke-width="3" stroke-linecap="round"/>
               </svg>
+              <span class="text-[10px] font-bold text-[#d9822b] bg-white px-2 py-0.5 rounded shadow-sm">CLICK TO VIEW</span>
             </div>
-            <div v-else-if="project.chartType === 'bars'" class="w-3/4 h-2/3 flex items-end justify-around gap-2 px-4">
-              <div class="w-6 bg-[#d9822b] opacity-30 h-1/2 rounded-t"></div>
-              <div class="w-6 bg-[#d9822b] opacity-60 h-3/4 rounded-t"></div>
-              <div class="w-6 bg-[#d9822b] h-full rounded-t"></div>
+            <div v-else-if="project.chartType === 'bars'" class="w-3/4 h-2/3 flex flex-col items-center justify-end">
+              <div class="w-full flex items-end justify-around gap-2 px-4 h-3/4 mb-4">
+                <div class="w-6 bg-[#d9822b] opacity-30 h-1/2 rounded-t"></div>
+                <div class="w-6 bg-[#d9822b] opacity-60 h-3/4 rounded-t"></div>
+                <div class="w-6 bg-[#d9822b] h-full rounded-t"></div>
+              </div>
+              <span class="text-[10px] font-bold text-[#d9822b] bg-white px-2 py-0.5 rounded shadow-sm">CLICK TO VIEW</span>
             </div>
             <div v-else class="w-full h-full flex flex-col items-center justify-center p-4 text-center">
               <div class="w-16 h-16 rounded-full border-4 border-[#d9822b] border-t-transparent mb-2"></div>
-              <span class="text-[10px] font-bold text-[#d9822b] bg-white px-2 py-0.5 rounded shadow-sm">CLICK TO VIEW CASE STUDY</span>
+              <span class="text-[10px] font-bold text-[#d9822b] bg-white px-2 py-0.5 rounded shadow-sm">CLICK TO VIEW</span>
             </div>
           </div>
           <div class="text-[11px] font-bold tracking-wider text-[#888] mb-2">{{ project.category }}</div>
           <h3 class="text-lg font-medium text-[#111] mb-2 leading-snug group-hover:text-[#d9822b] transition-colors">{{ project.title }}</h3>
           <p class="text-sm text-[#666] mb-4 leading-relaxed flex-grow">{{ project.description }}</p>
-          <button v-if="project.action === 'stroke'" @click.stop="openProject(project.action)" class="text-xs font-semibold tracking-wider text-[#111] hover:text-[#d9822b] flex items-center gap-1 transition-colors text-left">
-            VIEW CASE STUDY →
+          <button v-if="project.action !== 'home'" @click.stop="openProject(project.action)" class="text-xs font-semibold tracking-wider text-[#111] hover:text-[#d9822b] flex items-center gap-1 transition-colors text-left">
+            CLICK TO VIEW →
           </button>
         </div>
       </div>
@@ -267,6 +271,10 @@ function goHome() {
     <!-- Footer -->
     <footer id="contact" class="bg-[#fdfbf7] text-[#222] py-20 border-t border-[#eae6de]">
       <div class="max-w-4xl mx-auto px-6 text-center space-y-8">
+        <div class="space-y-3">
+          <h2 class="text-3xl sm:text-4xl font-normal text-[#111]">Get in Touch</h2>
+          <p class="text-xs font-semibold tracking-widest text-[#d9822b] uppercase">Let's Connect</p>
+        </div>
         <p class="text-base sm:text-lg text-[#555] max-w-2xl mx-auto leading-relaxed">
           Interested in collaborating on data projects, analytics, or research? I'd love to hear from you.
         </p>
@@ -279,9 +287,16 @@ function goHome() {
           </a>
 
           <!-- LinkedIn Button -->
-          <a href="https://linkedin.com" target="_blank" class="bg-white hover:bg-[#f5efe6] text-[#111] px-6 py-3.5 rounded-xl font-medium text-sm border border-[#eae6de] transition-colors flex items-center gap-2 shadow-sm">
+          <a href="https://www.linkedin.com/in/m-bagas-afrizal" target="_blank" class="bg-white hover:bg-[#f5efe6] text-[#111] px-6 py-3.5 rounded-xl font-medium text-sm border border-[#eae6de] transition-colors flex items-center gap-2 shadow-sm">
             <svg class="w-4 h-4 fill-current text-[#111]" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
             LinkedIn
+            <svg class="w-3.5 h-3.5 fill-none stroke-current text-[#555]" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+          </a>
+
+          <!-- GitHub Button -->
+          <a href="https://github.com/MBagasA" target="_blank" class="bg-white hover:bg-[#f5efe6] text-[#111] px-6 py-3.5 rounded-xl font-medium text-sm border border-[#eae6de] transition-colors flex items-center gap-2 shadow-sm">
+            <svg class="w-4 h-4 fill-current text-[#111]" viewBox="0 0 19 19"><path fill-rule="evenodd" d="M9.356 1.85C5.05 1.85 1.57 5.356 1.57 9.694a7.84 7.84 0 0 0 5.324 7.44c.387.079.528-.168.528-.376 0-.182-.013-.805-.013-1.454-2.165.467-2.616-.935-2.616-.935-.349-.91-.864-1.143-.864-1.143-.71-.48.051-.48.051-.48.787.051 1.2.805 1.2.805.695 1.194 1.817.857 2.268.649.064-.507.27-.857.49-1.052-1.728-.182-3.545-.857-3.545-3.87 0-.857.31-1.558.8-2.104-.078-.195-.349-1 .077-2.078 0 0 .657-.208 2.14.805a7.5 7.5 0 0 1 1.946-.26c.657 0 1.328.092 1.946.26 1.483-1.013 2.14-.805 2.14-.805.426 1.078.155 1.883.078 2.078.502.546.799 1.247.799 2.104 0 3.013-1.818 3.675-3.558 3.87.284.247.528.714.528 1.454 0 1.052-.012 1.896-.012 2.156 0 .208.142.455.528.377a7.84 7.84 0 0 0 5.324-7.441c.013-4.338-3.48-7.844-7.773-7.844" clip-rule="evenodd"/></svg>
+            GitHub
             <svg class="w-3.5 h-3.5 fill-none stroke-current text-[#555]" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
           </a>
         </div>
